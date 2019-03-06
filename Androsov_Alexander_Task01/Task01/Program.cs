@@ -11,16 +11,16 @@ namespace Task01
         static void Main(string[] args)
         {
             Console.Write("Введите сторону A прямоугольника : ");
-            var Width = int.Parse(Console.ReadLine());
+            var width = int.Parse(Console.ReadLine());
             Console.Write("Введите сторону B прямоугольника : ");
-            var Length = int.Parse(Console.ReadLine());
-            if (Width <= 0 || Length <= 0)
+            var length = int.Parse(Console.ReadLine());
+            if (width <= 0 || length <= 0)
             {
                 Console.WriteLine("Ошибка.Стороны не могут быть отрицательными или нулевыми!");
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine($"Площадь прямоугольника с заданными сторонами = {Length * Width}");
+            Console.WriteLine($"Площадь прямоугольника с заданными сторонами = {length * width}");
             Console.ReadKey();
         }
     }

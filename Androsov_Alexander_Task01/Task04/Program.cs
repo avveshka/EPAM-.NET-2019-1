@@ -12,26 +12,21 @@ namespace Task04
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Введите количество триугольников : ");
-            var CountTriangle = int.Parse(Console.ReadLine());
-            if (CountTriangle <= 0)
+            var countTriangle = int.Parse(Console.ReadLine());
+            if (countTriangle <= 0)
             {
                 Console.WriteLine("Число триугольников не может быть отрицаиельным или равным нулю!");
                 Console.ReadKey();
                 return;
             }
-            for (var i = 0; i < CountTriangle; i++)
+            for (var i = 0; i < countTriangle; i++)
             {
                 for (var j = 0; j <= i; j++)
                 {
-                    for (var k = 0; k < (CountTriangle - j - 1); k++)
-                    {
-                        Console.Write(" ");
-                    }
-                    for (var k = 0; k <= j + j; k++)
-                    {
-                        Console.Write("*");
-                    }
-                    Console.WriteLine();
+                    string space = new string(' ', countTriangle - j - 1);
+                    Console.Write(space);
+                    string star = new string('*', j + j + 1);
+                    Console.WriteLine(star);
                 }
             }
             Console.ReadKey();

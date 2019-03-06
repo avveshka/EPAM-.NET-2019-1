@@ -10,16 +10,16 @@ namespace Task05
     {
         static void Main(string[] args)
         {
-            var Border = 1000;
-            var Sum = 0;
-            for (var i = 0; i < Border; i++)
+            var border = 1000;
+            var sum = 0;
+            for (var i = 0; i < border; i++)
             {
                 if (i % 3 == 0 || i % 5 == 0)
                 {
-                    Sum += i;
+                    sum += i;
                 }
             }
-            Console.WriteLine($"Сумма всех чисел кратных 3 или 5 до 1000 = {Sum}");
+            Console.WriteLine($"Сумма всех чисел кратных 3 или 5 до 1000 = {sum}");
             Console.ReadKey();
         }
     }

@@ -12,20 +12,17 @@ namespace Task02
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Введите количество строк : ");
-            var CountString = int.Parse(Console.ReadLine());
-            if (CountString <= 0)
+            var countstring = int.Parse(Console.ReadLine());
+            if (countstring <= 0)
             {
                 Console.WriteLine("Число строк не может быть отрицаиельным или равным нулю!");
                 Console.ReadKey();
                 return;
             }
-            for (var i = 0; i < CountString; i++)
+            for (var i = 0; i < countstring; i++)
             {
-                for (var j = 0; j <= i; j++)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine();
+                string star = new string('*', i+1);
+                Console.WriteLine(star);
             }
             Console.ReadKey();
         }
