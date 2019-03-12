@@ -18,6 +18,8 @@ namespace Task01
             {
                 Console.WriteLine($"array[{i}] = {array[i]} ");
             }
+            Console.WriteLine($"Минимальное значение = {array[0]}");
+            Console.WriteLine($"Максимальное значение = {array[array.Length-1]}");
             Console.WriteLine();
             Console.ReadKey();
         }

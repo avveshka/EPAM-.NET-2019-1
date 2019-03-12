@@ -16,7 +16,7 @@ namespace Task04
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    if ((i + j + 2) % 2 == 0)
+                    if ((i + j) % 2 == 0)
                     {
                         sum += array[i, j];
                     }
