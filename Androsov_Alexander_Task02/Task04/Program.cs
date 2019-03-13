@@ -1,5 +1,4 @@
-﻿using HelperFunction;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,34 +8,27 @@ namespace Task04
 {
     class Program
     {
-        static int SumArray(int[,] array)
-        {
-            int sum = 0;
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    if ((i + j) % 2 == 0)
-                    {
-                        sum += array[i, j];
-                    }
-                }
-            }
-            return sum;
-        }
         static void Main(string[] args)
         {
-            int[,] array = new int[5, 5];
-            array = HelperFunctions.RandomFunction(array);
-            for (int i = 0; i < array.GetLength(0); i++)
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Введите количество триугольников : ");
+            var countTriangle = int.Parse(Console.ReadLine());
+            if (countTriangle <= 0)
             {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    Console.Write($"array[{i + 1},{j + 1}] = {array[i, j]} ");
-                }
-                Console.WriteLine();
+                Console.WriteLine("Число триугольников не может быть отрицаиельным или равным нулю!");
+                Console.ReadKey();
+                return;
             }
-            Console.WriteLine($"Сумма элементов с четной суммой индексов равна = {SumArray(array)}");
+            for (var i = 0; i < countTriangle; i++)
+            {
+                for (var j = 0; j <= i; j++)
+                {
+                    string space = new string(' ', countTriangle - j - 1);
+                    Console.Write(space);
+                    string star = new string('*', j + j + 1);
+                    Console.WriteLine(star);
+                }
+            }
             Console.ReadKey();
         }
     }

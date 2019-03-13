@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelperFunction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,25 +9,34 @@ namespace Task01
 {
     class Program
     {
-        static void Main(string[] args)
+        static int[] SortArray(int[] array)
         {
-            Console.Write("Введите строку : ");
-            string input = Console.ReadLine();
-            char[] exception = { ' ', ',', ':', ';', '?', '.', '/', '\t', '*' };
-            string[] words = input.Split(exception, StringSplitOptions.RemoveEmptyEntries);
-            var temp = 0f;
-            var forParse = 0;
-            var wordcount = 0f;
-            foreach (string word in words)
+            int temp = 0;
+            for (int i = 0; i < array.Length - 1; i++)
             {
-                if (!int.TryParse(word, out forParse))
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    temp += word.Length;
-                    wordcount++;
-                    Console.WriteLine($"Слово {word} длинной - {word.Length}");
+                    if (array[i] > array[j])
+                    {
+                        temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
                 }
             }
-            Console.WriteLine($"Средняя длинна слов = {temp / wordcount}");
+            return array;
+        }
+        static void Main(string[] args)
+        {
+            int[] array = new int[10];
+            array = HelperFunctions.RandomFunction(array);
+            array = SortArray(array);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine($"array[{i}] = {array[i]} ");
+            }
+            Console.WriteLine($"Минимальное значение = {array[0]}");
+            Console.WriteLine($"Максимальное значение = {array[array.Length - 1]}");
             Console.ReadKey();
         }
     }

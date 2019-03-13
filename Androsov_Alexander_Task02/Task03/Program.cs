@@ -1,5 +1,4 @@
-﻿using HelperFunction;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,27 +8,24 @@ namespace Task03
 {
     class Program
     {
-        static int Sum(int[] array)
-        {
-            int sum = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] > 0)
-                {
-                    sum += array[i];
-                }
-            }
-            return sum;
-        }
         static void Main(string[] args)
         {
-            int[] array = new int[10];
-            array = HelperFunctions.RandomFunction(array);
-            for (int i = 0; i < array.Length; i++)
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Введите количество строк : ");
+            var countString = int.Parse(Console.ReadLine());
+            if (countString <= 0)
             {
-                Console.WriteLine($"array[{i + 1}] = {array[i]}");
+                Console.WriteLine("Число строк не может быть отрицаиельным или равным нулю!");
+                Console.ReadKey();
+                return;
             }
-            Console.WriteLine($"Сумма неотрицательных элементов = {Sum(array)}");
+            for (var i = 0; i < countString; i++)
+            {
+                string space = new string(' ', countString - i - 1);
+                Console.Write(space);
+                string star = new string('*', i + i +1);
+                Console.WriteLine(star);
+            }
             Console.ReadKey();
         }
     }

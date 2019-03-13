@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32AE79C8-314B-4E67-9880-B5FC08D226FF}</ProjectGuid>
+    <ProjectGuid>{86BEB220-8139-49E7-ABBA-A832633BE3A2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Task04</RootNamespace>
     <AssemblyName>Task04</AssemblyName>
@@ -48,12 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\HelperFunction.csproj">
-      <Project>{B780FCCF-FBD8-475F-88ED-350F887B5571}</Project>
-      <Name>HelperFunction</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

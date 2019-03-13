@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelperFunction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,28 +9,28 @@ namespace Task02
 {
     class Program
     {
-        static void Main(string[] args)
+        static int[,,] ChangeToZero(int[,,] array)
         {
-            string firstString = "";
-            string secondString = "";
-            string finalString = "";
-            Console.Write("Введи первую строку :");
-            firstString = Console.ReadLine();
-            Console.Write("Введи вторую строку :");
-            secondString = Console.ReadLine();
-            foreach (char letter in firstString)
+            for (int i = 0; i < array.GetLength(0); i++)
             {
-                if (secondString.Contains(letter))
+                for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    finalString += letter;
-                    finalString += letter;
-                }
-                else
-                {
-                    finalString += letter;
+                    for (int k = 0; k < array.GetLength(2); k++)
+                    {
+                        if (array[i, j, k] < 0)
+                        {
+                            array[i, j, k] = 0;
+                        }
+                    }
                 }
             }
-            Console.WriteLine($"Финальная строка = {finalString}");
+            return array;
+        }
+        static void Main(string[] args)
+        {
+            int[,,] array = new int[5, 5, 5];
+            array = HelperFunctions.RandomFunction(array);
+            array = ChangeToZero(array);
             Console.ReadKey();
         }
     }

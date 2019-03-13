@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelperFunction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,27 +9,34 @@ namespace Task04
 {
     class Program
     {
+        static int SumArray(int[,] array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
+                        sum += array[i, j];
+                    }
+                }
+            }
+            return sum;
+        }
         static void Main(string[] args)
         {
-            string str = "";
-            StringBuilder sb = new StringBuilder();
-            int N = 50000;
-            DateTime time = new DateTime();
-            DateTime time1 = new DateTime();
-            time = DateTime.Now;
-            for (int i = 0; i < N; i++)
+            int[,] array = new int[5, 5];
+            array = HelperFunctions.RandomFunction(array);
+            for (int i = 0; i < array.GetLength(0); i++)
             {
-                str += "*";
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write($"array[{i + 1},{j + 1}] = {array[i, j]} ");
+                }
+                Console.WriteLine();
             }
-            time1 = DateTime.Now;
-            Console.WriteLine($"Добавление {N} звёзд в string заняло = {time1.Subtract(time)}");
-            time = DateTime.Now;
-            for (int i = 0; i < N; i++)
-            {
-                sb.Append("*");
-            }
-            time1 = DateTime.Now;
-            Console.WriteLine($"Добавление {N} звёзд в stringbuilder заняло = {time1.Subtract(time)}");
+            Console.WriteLine($"Сумма элементов с четной суммой индексов равна = {SumArray(array)}");
             Console.ReadKey();
         }
     }

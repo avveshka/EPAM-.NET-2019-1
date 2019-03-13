@@ -1,5 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using HelperFunction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,40 +9,27 @@ namespace Task03
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Sum(int[] array)
         {
-            DateTime now = DateTime.Now;
-            double number = 28434.3432;
-            bool trueInput = false;
-            while (!trueInput)
+            int sum = 0;
+            for (int i = 0; i < array.Length; i++)
             {
-                Console.WriteLine("Выберите культуру : ");
-                Console.WriteLine("1: ru vs en");
-                Console.WriteLine("2: en vs invariant");
-                Console.WriteLine("3: ru vs invariant");
-                string input = Console.ReadLine();
-                switch (input)
+                if (array[i] > 0)
                 {
-                    case "1":
-                        trueInput = true;
-                        Console.WriteLine($"Дата {now.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {now.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
-                        Console.WriteLine($"Число {number.ToString("F", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {number.ToString("F", CultureInfo.CreateSpecificCulture("en-US"))}");
-                        break;
-                    case "2":
-                        trueInput = true;
-                        Console.WriteLine($"Дата {now.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))} vs {now.ToString("d", DateTimeFormatInfo.InvariantInfo)}");
-                        Console.WriteLine($"Число {number.ToString("F", CultureInfo.CreateSpecificCulture("en-US"))} vs {number.ToString("e4", CultureInfo.InvariantCulture)}");
-                        break;
-                    case "3":
-                        trueInput = true;
-                        Console.WriteLine($"Дата {now.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {now.ToString("d", DateTimeFormatInfo.InvariantInfo)}");
-                        Console.WriteLine($"Число {number.ToString("F", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {number.ToString("e4", CultureInfo.InvariantCulture)}");
-                        break;
-                    default:
-                        Console.WriteLine("Вы выбрали несуществующий вариант!Попробуйте ещё раз.");
-                        break;
+                    sum += array[i];
                 }
             }
+            return sum;
+        }
+        static void Main(string[] args)
+        {
+            int[] array = new int[10];
+            array = HelperFunctions.RandomFunction(array);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine($"array[{i + 1}] = {array[i]}");
+            }
+            Console.WriteLine($"Сумма неотрицательных элементов = {Sum(array)}");
             Console.ReadKey();
         }
     }
