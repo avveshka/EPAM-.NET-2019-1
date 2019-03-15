@@ -12,7 +12,7 @@ namespace Task02
         {
             string firstString = "";
             string secondString = "";
-            string finalString = "";
+            StringBuilder finalString = new StringBuilder();
             Console.Write("Введи первую строку :");
             firstString = Console.ReadLine();
             Console.Write("Введи вторую строку :");
@@ -21,13 +21,11 @@ namespace Task02
             {
                 if (secondString.Contains(letter))
                 {
-                    finalString += letter;
-                    finalString += letter;
+                    finalString.Append(letter);
                 }
-                else
-                {
-                    finalString += letter;
-                }
+
+                finalString.Append(letter);
+
             }
             Console.WriteLine($"Финальная строка = {finalString}");
             Console.ReadKey();

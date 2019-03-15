@@ -13,8 +13,8 @@ namespace Task06
         {
             Console.WriteLine("Введите вещественное число : ");
             string input = Console.ReadLine();
-            string patternCommon = @"((-[0-9]*)|([0-9]*))\.[0-9]*";
-            string patternScience = @"((-[0-9]*)|([0-9]*))\.[0-9]*e((-[0-9]*)|([0-9]*))";
+            string patternCommon = @"(-?([0-9]*))\.[0-9]*";
+            string patternScience = @"(-?([0-9]*))\.[0-9]*e(-?([0-9]*))";
             Regex regexCommon = new Regex(patternCommon);
             Regex regexScience = new Regex(patternScience);
             if (regexScience.IsMatch(input))

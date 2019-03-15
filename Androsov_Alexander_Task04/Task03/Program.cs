@@ -11,8 +11,6 @@ namespace Task03
     {
         static void Main(string[] args)
         {
-            DateTime now = DateTime.Now;
-            double number = 28434.3432;
             bool trueInput = false;
             while (!trueInput)
             {
@@ -25,18 +23,15 @@ namespace Task03
                 {
                     case "1":
                         trueInput = true;
-                        Console.WriteLine($"Дата {now.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {now.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))}");
-                        Console.WriteLine($"Число {number.ToString("F", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {number.ToString("F", CultureInfo.CreateSpecificCulture("en-US"))}");
+                        OutCulture("ru-RU", "en-US");
                         break;
                     case "2":
                         trueInput = true;
-                        Console.WriteLine($"Дата {now.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))} vs {now.ToString("d", DateTimeFormatInfo.InvariantInfo)}");
-                        Console.WriteLine($"Число {number.ToString("F", CultureInfo.CreateSpecificCulture("en-US"))} vs {number.ToString("e4", CultureInfo.InvariantCulture)}");
+                        OutCulture("en-US", "invariant");
                         break;
                     case "3":
                         trueInput = true;
-                        Console.WriteLine($"Дата {now.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {now.ToString("d", DateTimeFormatInfo.InvariantInfo)}");
-                        Console.WriteLine($"Число {number.ToString("F", CultureInfo.CreateSpecificCulture("ru-RU"))} vs {number.ToString("e4", CultureInfo.InvariantCulture)}");
+                        OutCulture("ru-RU", "invariant");
                         break;
                     default:
                         Console.WriteLine("Вы выбрали несуществующий вариант!Попробуйте ещё раз.");
@@ -44,6 +39,24 @@ namespace Task03
                 }
             }
             Console.ReadKey();
+        }
+        public static void OutCulture(string firstCulture, string secondCulture)
+        {
+            DateTime now = DateTime.Now;
+            double number = 28434.3432;
+            string dateOut = "d";
+            string numberOut = "F";
+            string numberOutInvariant = "e4";
+            if (secondCulture != "invariant")
+            {
+                Console.WriteLine($"Число {firstCulture} {number.ToString(numberOut, CultureInfo.CreateSpecificCulture(firstCulture))} vs Число {secondCulture} {number.ToString(numberOutInvariant, CultureInfo.CreateSpecificCulture(secondCulture))}");
+                Console.WriteLine($"Дата {firstCulture} {now.ToString(dateOut, CultureInfo.CreateSpecificCulture(firstCulture))} vs Дата {secondCulture} {now.ToString(dateOut, CultureInfo.CreateSpecificCulture(secondCulture))}");
+            }
+            else
+            {
+                Console.WriteLine($"Число {firstCulture} {number.ToString(numberOut, CultureInfo.CreateSpecificCulture(firstCulture))} vs Число {secondCulture} {now.ToString(dateOut, DateTimeFormatInfo.InvariantInfo)}");
+                Console.WriteLine($"Дата {firstCulture} {now.ToString(dateOut, CultureInfo.CreateSpecificCulture(firstCulture))} vs Дата {secondCulture} {number.ToString(numberOutInvariant, CultureInfo.InvariantCulture)}");
+            }
         }
     }
 }

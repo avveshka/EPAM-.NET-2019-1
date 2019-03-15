@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,24 +12,24 @@ namespace Task04
         static void Main(string[] args)
         {
             string str = "";
-            StringBuilder sb = new StringBuilder();
-            int N = 50000;
-            DateTime time = new DateTime();
-            DateTime time1 = new DateTime();
-            time = DateTime.Now;
+            int N = 1000;
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             for (int i = 0; i < N; i++)
             {
                 str += "*";
             }
-            time1 = DateTime.Now;
-            Console.WriteLine($"Добавление {N} звёзд в string заняло = {time1.Subtract(time)}");
-            time = DateTime.Now;
+            stopWatch.Stop();
+            Console.WriteLine($"Добавление {N} звёзд в string заняло = {stopWatch.Elapsed}");
+            StringBuilder sb = new StringBuilder();
+            stopWatch.Reset();
+            stopWatch.Start();
             for (int i = 0; i < N; i++)
             {
                 sb.Append("*");
             }
-            time1 = DateTime.Now;
-            Console.WriteLine($"Добавление {N} звёзд в stringbuilder заняло = {time1.Subtract(time)}");
+            stopWatch.Stop();
+            Console.WriteLine($"Добавление {N} звёзд в stringbuilder заняло = {stopWatch.Elapsed}");
             Console.ReadKey();
         }
     }
