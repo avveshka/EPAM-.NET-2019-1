@@ -24,9 +24,11 @@ namespace Task04
                 Console.WriteLine("Строки не равны");
             }
             mystring1 = mystring1 + mystring2;
-            Console.WriteLine($"Сложенная строка - {mystring1.Output}");
+            string outputstring = mystring1.ToString();
+            Console.WriteLine($"Сложенная строка - {outputstring}");
             mystring1 = mystring1 - mystring2;
-            Console.WriteLine($"Вычтенная строка - {mystring1.Output}");
+            outputstring = mystring1.ToString();
+            Console.WriteLine($"Вычтенная строка - {outputstring}");
             Console.ReadKey();
         }
     }

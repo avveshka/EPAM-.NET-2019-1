@@ -14,18 +14,6 @@ namespace ClassMyString
         {
             arrayOfChar = s.ToCharArray();
         }
-        public StringBuilder Output
-        {
-            get
-            {
-                StringBuilder outputstring = new StringBuilder();
-                foreach (char letter in arrayOfChar)
-                {
-                    outputstring.Append(letter);
-                }
-                return outputstring;
-            }
-        }
         public static MyString operator +(MyString string1, MyString string2)
         {
             MyString mystring = new MyString();
@@ -72,6 +60,16 @@ namespace ClassMyString
                 }
             }
             return equal;
+        }
+        public override string ToString()
+        {
+            StringBuilder outputstring = new StringBuilder();
+            foreach (char letter in arrayOfChar)
+            {
+                outputstring.Append(letter);
+            }
+            string finalstring = outputstring.ToString();
+            return finalstring;
         }
     }
 }
