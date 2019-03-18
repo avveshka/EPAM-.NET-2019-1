@@ -11,33 +11,81 @@ namespace ClassTriangle
         private float _a;
         private float _b;
         private float _c;
-        public Triangle(string a, string b, string c)
+
+        public Triangle(float a,float b,float c)
         {
-            if (float.TryParse(a, out var floatA) && float.TryParse(b, out var floatB) && float.TryParse(c, out var floatC))
+            A = a;
+            B = b;
+            C = c;
+        }
+        
+        public float A
+        {
+            private set
             {
-                if (floatA <= 0 || floatB <= 0 || floatC <= 0)
+                if(value <= 0 )
                 {
-                    throw new Exception("Стороны должны быть положительными");
+                    throw new Exception("Сторона A должна быть положительной");
                 }
-                if ((floatA + floatB) < floatC || (floatB + floatC) < floatA || (floatC + floatA) < floatB)
+                if(value > B + C)
                 {
-                    throw new Exception("Две стороны в сумме не может быть меньше третьей");
+                    throw new Exception("Сторона A больше двух других");
                 }
-                _a = floatA;
-                _b = floatB;
-                _c = floatC;
+                _a = value;
             }
-            else
+            get
             {
-                throw new Exception("Стороны должны быть числвми");
+                return _a;
             }
         }
+
+        public float B
+        {
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("Сторона B должна быть положительной");
+                }
+                if (value > A + C)
+                {
+                    throw new Exception("Сторона B больше двух других");
+                }
+                _b = value;
+            }
+            get
+            {
+                return _b;
+            }
+        }
+
+        public float C
+        {
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("Сторона C должна быть положительной");
+                }
+                if (value > B + A)
+                {
+                    throw new Exception("Сторона C больше двух других");
+                }
+                _c = value;
+            }
+            get
+            {
+                return _c;
+            }
+        }
+
         public float Perimeter()
         {
             var perimeter = 0f;
             perimeter = _a + _b + _c;
             return perimeter;
         }
+
         public double Square()
         {
             var square = 0d;

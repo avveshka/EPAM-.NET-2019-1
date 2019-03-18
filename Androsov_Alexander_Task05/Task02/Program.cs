@@ -12,11 +12,11 @@ namespace Task02
         static void Main(string[] args)
         {
             Console.Write("Введите X координату центра окружности: ");
-            string x = Console.ReadLine();
+            int x = int.Parse(Console.ReadLine());
             Console.Write("Введите Y координату центра окружности: ");
-            string y = Console.ReadLine();
+            int y = int.Parse(Console.ReadLine());
             Console.Write("Введите радиус окружности: ");
-            string radius = Console.ReadLine();
+            int radius = int.Parse(Console.ReadLine());
             Round round = new Round(x, y, radius);
             Console.WriteLine($"Площадь круга = {round.CircleSquare}. Длинна окуржности = {round.CircleLength}");
             Console.ReadKey();

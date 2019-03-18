@@ -12,11 +12,11 @@ namespace Task03
         static void Main(string[] args)
         {
             Console.Write("Введите первую сторону треугольника: ");
-            string a = Console.ReadLine();
+            int a = int.Parse(Console.ReadLine());
             Console.Write("Введите вторую сторону треугольника: ");
-            string b = Console.ReadLine();
+            int b = int.Parse(Console.ReadLine());
             Console.Write("Введите третью сторону треугольника: ");
-            string c = Console.ReadLine();
+            int c = int.Parse(Console.ReadLine());
             Triangle triangle = new Triangle(a,b,c);
             Console.WriteLine($"Периметр треугольника = {triangle.Perimeter()}. Площадь треугольника = {triangle.Square()}");
             Console.ReadKey();

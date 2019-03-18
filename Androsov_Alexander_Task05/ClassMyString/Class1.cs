@@ -9,25 +9,23 @@ namespace ClassMyString
     public class MyString
     {
         private char[] arrayOfChar;
+
         public MyString() { }
+
         public MyString(string s)
         {
             arrayOfChar = s.ToCharArray();
         }
+
         public static MyString operator +(MyString string1, MyString string2)
         {
             MyString mystring = new MyString();
             mystring.arrayOfChar = new char[string1.arrayOfChar.Length + string2.arrayOfChar.Length];
-            for (int i = 0; i < string1.arrayOfChar.Length; i++)
-            {
-                mystring.arrayOfChar[i] = string1.arrayOfChar[i];
-            }
-            for (int i = 0; i < string2.arrayOfChar.Length; i++)
-            {
-                mystring.arrayOfChar[i + string1.arrayOfChar.Length] = string2.arrayOfChar[i];
-            }
+            string1.arrayOfChar.CopyTo(mystring.arrayOfChar, 0);
+            string2.arrayOfChar.CopyTo(mystring.arrayOfChar, string1.arrayOfChar.Length);
             return mystring;
         }
+
         public static MyString operator -(MyString string1, MyString string2)
         {
             StringBuilder stringbuilder1 = new StringBuilder();
@@ -35,32 +33,32 @@ namespace ClassMyString
             {
                 stringbuilder1.Append(letter);
             }
-            string string3 = "";
-            foreach (char letter in string2.arrayOfChar)
-            {
-                string3 += letter;
-            }
+            string string3 = string2.ToString();
             stringbuilder1.Replace(string3, "");
             return new MyString(stringbuilder1.ToString());
         }
-        public static bool operator !=(MyString string1, MyString string2) { return true; }
+
+        public static bool operator !=(MyString string1, MyString string2) { return !(string1==string2); ; }
+
         public static bool operator ==(MyString string1, MyString string2)
         {
             bool equal = true;
             if (string1.arrayOfChar.Length != string2.arrayOfChar.Length)
             {
-                equal = false;
-                return equal;
+                return false;
             }
+
             for (int i = 0; i < string1.arrayOfChar.Length; i++)
             {
                 if (string1.arrayOfChar[i] != string2.arrayOfChar[i])
                 {
-                    equal = false;
+                    return false;
                 }
             }
+
             return equal;
         }
+
         public override string ToString()
         {
             StringBuilder outputstring = new StringBuilder();
@@ -68,8 +66,7 @@ namespace ClassMyString
             {
                 outputstring.Append(letter);
             }
-            string finalstring = outputstring.ToString();
-            return finalstring;
+            return outputstring.ToString();
         }
     }
 }

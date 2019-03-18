@@ -11,7 +11,8 @@ namespace Task01
     {
         static void Main(string[] args)
         {
-            User me = new User("Александр","Андросов","Вячеславович","1998","13","09");
+            DateTime birthday = new DateTime(1998, 09, 13);
+            User me = new User("Александр", "Андросов", "Вячеславович", birthday);
             Console.WriteLine($"Пользователя зовут {me.Surname} {me.Name} {me.Patronymic} и ему {me.Old} лет");
             Console.ReadKey();
         }

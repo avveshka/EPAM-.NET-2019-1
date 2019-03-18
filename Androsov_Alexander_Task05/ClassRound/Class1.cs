@@ -13,37 +13,45 @@ namespace ClassRound
         private int _radius;
         private double _circleLength;
         private double _circleSquare;
-        public Round(string xCoordinate, string yCoordinate, string radius)
+
+        public Round(int x, int y, int radius)
         {
-            if (int.TryParse(xCoordinate, out var intX) && int.TryParse(yCoordinate, out var intY) && int.TryParse(radius, out var intRadius))
+            _centerCoordinateX = x;
+            _centerCoordinateY = y;
+            if(radius<=0)
             {
-                _centerCoordinateX = intX;
-                _centerCoordinateY = intY;
-                _radius = intRadius;
-                _circleLength = 2 * 3.14 * _radius;
-                _circleSquare = 3.14 * _radius * _radius;
+                throw new Exception("Радиус должен быть положительным");
             }
-            else
             {
-                throw new Exception("Центр и радиус должны быть числами");
+                _radius = radius;
             }
+            CircleLength = radius;
+            CircleSquare = radius;
         }
+
+
+
         public double CircleLength
         {
             get
             {
-                double circlelength = 0;
-                circlelength = _circleLength;
-                return circlelength;
+                return _circleLength;
+            }
+            set
+            {
+                _circleLength = 2 * 3.14 * value;
             }
         }
+
         public double CircleSquare
         {
             get
             {
-                double circlesquare = 0;
-                circlesquare = _circleSquare;
-                return circlesquare;
+                return _circleSquare;
+            }
+            set
+            {
+                _circleSquare = 3.14 * value * value;
             }
         }
     }
