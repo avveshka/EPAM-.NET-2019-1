@@ -8,11 +8,11 @@ namespace ClassRound
 {
     public class Round
     {
-        private int _centerCoordinateX;
-        private int _centerCoordinateY;
-        private int _radius;
-        private double _circleLength;
-        private double _circleSquare;
+        protected int _centerCoordinateX;
+        protected int _centerCoordinateY;
+        protected int _radius;
+        protected double _circleLength;
+        protected double _circleSquare;
 
         public Round(int x, int y, int radius)
         {
@@ -29,9 +29,7 @@ namespace ClassRound
             CircleSquare = radius;
         }
 
-
-
-        public double CircleLength
+        public virtual double CircleLength
         {
             get
             {
@@ -43,7 +41,7 @@ namespace ClassRound
             }
         }
 
-        public double CircleSquare
+        public virtual double CircleSquare
         {
             get
             {
