@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Task04
 {
-    class Hero : ItemOnField
+    class Hero : ItemOnField,IMovable,IAtackble
     {
         public Hero()
         {
             ItemType = "Hero";
         }
+
+        public void Atack() { }
         public void MoveDown() { }
         public void MoveLeft() { }
         public void MoveRight() { }

@@ -43,11 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bonus.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldCell.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="Inonimate.cs" />
+    <Compile Include="IMovable.cs" />
+    <Compile Include="IAtackble.cs" />
     <Compile Include="ItemOnField.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

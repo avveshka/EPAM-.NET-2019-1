@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Task04
 {
-    class FieldCell : Field
+    class FieldCell
     {
         public bool IsFull;
         private ItemOnField _item;
         public FieldCell(int width, int heigth)
-            : base(width, heigth)
         {
             IsFull = false;
         }
