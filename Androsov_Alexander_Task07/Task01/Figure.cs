@@ -11,5 +11,17 @@ namespace ClassFigure
         protected int centerX;
         protected int centerY;
         public abstract void Draw();
+
+        public int X
+        {
+            protected set => centerX = value;
+            get => centerX;
+        }
+
+        public int Y
+        {
+            protected set => centerY = value;
+            get => centerY;
+        }
     }
 }

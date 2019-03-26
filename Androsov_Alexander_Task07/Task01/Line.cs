@@ -12,8 +12,8 @@ namespace ClassLine
         private int _length;
         public Line(int x, int y, int length)
         {
-            centerX = x;
-            centerY = y;
+            X = x;
+            Y = y;
             Length = length;
         }
         public int Length

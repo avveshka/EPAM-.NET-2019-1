@@ -12,8 +12,8 @@ namespace ClassCircle
         private int _radius;
         public Circle(int x, int y, int radius)
         {
-            centerX = x;
-            centerY = y;
+            X = x;
+            Y = y;
             Radius = radius;
         }
         public int Radius

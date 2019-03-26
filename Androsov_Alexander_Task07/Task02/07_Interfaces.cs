@@ -112,8 +112,4 @@ namespace DemoApplication
     {
         double this[int index] { get; }
     }
-
-    interface IIndexableSeries : ISeries, IIndexable
-    {
-    }
 }
