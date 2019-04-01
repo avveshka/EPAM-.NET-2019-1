@@ -31,9 +31,14 @@ namespace Task01
             Length = array.Length;
         }
 
-        public DynamicArray(IEnumerable enumerable)
+        public DynamicArray(IEnumerable<T> enumerable)
         {
-
+            _array = new T[enumerable.Count()*2];
+            foreach (var item in enumerable)
+            {
+                Add(item);
+            }
+            //Length = enumerable.Count();
         }
 
         public int Length
