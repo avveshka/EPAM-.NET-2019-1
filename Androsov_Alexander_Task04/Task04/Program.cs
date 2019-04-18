@@ -12,7 +12,7 @@ namespace Task04
         static void Main(string[] args)
         {
             string str = "";
-            int N = 1000;
+            int N = 1000000;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             for (int i = 0; i < N; i++)
