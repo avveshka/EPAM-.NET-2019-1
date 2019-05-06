@@ -25,10 +25,34 @@ namespace Entities
             BirthDay = birthday;
         }
 
+        public User(int id, string firstName, string lastName, DateTime birthday)
+        {
+            countUsers++;
+            ID = id;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDay = birthday;
+        }
+
         public User(string firstName, string lastName, DateTime birthday, List<Award> awardList)
         {
             countUsers++;
             ID = countUsers;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDay = birthday;
+            AwardList = awardList;
+            foreach (var item in awardList)
+            {
+                UserShowAward += item.Title;
+                UserShowAward += " ";
+            }
+        }
+
+        public User(int id, string firstName, string lastName, DateTime birthday, List<Award> awardList)
+        {
+            countUsers++;
+            ID = id;
             FirstName = firstName;
             LastName = lastName;
             BirthDay = birthday;

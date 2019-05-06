@@ -47,11 +47,12 @@ namespace Task14
             userForm.ShowDialog();
             if (userForm.DialogResult == DialogResult.OK)
             {
-                Storage.AddUserToList(new User(userForm.FirstName, userForm.LastName, userForm.BirthDay));
+                List<Award> temp = new List<Award>();
                 foreach (var item in userForm.AwardList)
                 {
-                    Storage.AddAwardForLastUser(item);
+                    temp.Add(item);
                 }
+                Storage.AddUserToList(new User(userForm.FirstName, userForm.LastName, userForm.BirthDay, temp));
                 dgvUsers.DataSource = null;
                 dgvUsers.DataSource = Storage.GetUserList();
             }
@@ -85,6 +86,8 @@ namespace Task14
                     Storage.RemoveUserFromList(user);
                 }
             }
+            dgvUsers.DataSource = null;
+            dgvUsers.DataSource = Storage.GetUserList();
         }
 
         private void ctlAwardMenuEditAdd_Click(object sender, EventArgs e)

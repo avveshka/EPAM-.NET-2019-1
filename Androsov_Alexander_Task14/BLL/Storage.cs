@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,22 +17,32 @@ namespace Task14
         private static SortMode _sortModeAwards = SortMode.Asceding;
         //private static BindingList<User> listUser = new BindingList<User>();
         //private static BindingList<Award> listAward = new BindingList<Award>();
-        public static UserList ListUser = new UserList();
-        public static AwardList ListAward = new AwardList();
+        public static /*UserSqlList*/IUserStorage ListUser;// = new UserSqlList(DataSetting.Connection);
+        public static /*AwardSqlList*/IAwardStorage ListAward;// = new AwardSqlList(DataSetting.Connection);
 
         public static void Initializestorage()
         {
-            ListUser.ListUsers.Add(new User("Александр", "Андросов", new DateTime(1998, 09, 13)));
-            ListUser.ListUsers.Add(new User("Василий", "Гривин", new DateTime(1998, 06, 21)));
-            ListUser.ListUsers.Add(new User("Илья", "Паненков", new DateTime(1998, 11, 6)));
-            ListAward.ListAwards.Add(new Award("Оскар", "За лучший фильм или роль"));
-            ListAward.ListAwards.Add(new Award("Нобелевская премия", "За выдающиеся открытия в сфере науки"));
-            ListAward.ListAwards.Add(new Award("Букеровская премия"));
-            ListUser.ListUsers[0].AddAward(GetAwardByTitle("Оскар"));
-            ListUser.ListUsers[0].AddAward(GetAwardByTitle("Нобелевская премия"));
-            ListUser.ListUsers[1].AddAward(GetAwardByTitle("Оскар"));
-            ListUser.ListUsers[2].AddAward(GetAwardByTitle("Оскар"));
-            ListUser.ListUsers[1].AddAward(GetAwardByTitle("Букеровская премия"));
+            if (ConfigurationManager.AppSettings["useSQL"] == "true")
+            {
+                ListUser = new UserSqlList(DataSetting.Connection);
+                ListAward = new AwardSqlList(DataSetting.Connection);
+            }
+            else
+            {
+                ListUser = new UserList();
+                ListAward = new AwardList();
+                ListUser.Add(new User("Александр", "Андросов", new DateTime(1998, 09, 13)));
+                ListUser.Add(new User("Василий", "Гривин", new DateTime(1998, 06, 21)));
+                ListUser.Add(new User("Илья", "Паненков", new DateTime(1998, 11, 6)));
+                ListAward.Add(new Award(1, "Оскар", "За лучший фильм или роль"));
+                ListAward.Add(new Award(2, "Нобелевская премия", "За выдающиеся открытия в сфере науки"));
+                ListAward.Add(new Award(3, "Букеровская премия"));
+                ListUser.AddAward(GetAwardByTitle("Оскар"), 0);
+                ListUser.AddAward(GetAwardByTitle("Нобелевская премия"), 0);
+                ListUser.AddAward(GetAwardByTitle("Оскар"), 1);
+                ListUser.AddAward(GetAwardByTitle("Оскар"), 2);
+                ListUser.AddAward(GetAwardByTitle("Букеровская премия"), 1);
+            }
         }
         //public static BindingList<Award> ListAward { get => listAward; set => listAward = value; }
         //public static BindingList<User> ListUser { get => listUser; set => listUser = value; }
@@ -39,7 +50,7 @@ namespace Task14
         public static Award GetAwardByTitle(string title)
         {
             Award temp;
-            foreach (var item in ListAward.ListAwards)
+            foreach (var item in ListAward.GetList())
             {
                 if (item.Title.Equals(title))
                 {
@@ -47,54 +58,55 @@ namespace Task14
                     return temp;
                 }
             }
-            return (new Award("Премия Дарвиа"));
+            throw new Exception();
         }
 
         public static BindingList<User> SortUser(int columnIndex)
         {
+            var temp = ListUser.GetList();
             switch (columnIndex)
             {
                 case 0:
                     {
                         if (_sortModeUsers == SortMode.Asceding)
                         {
-                            ListUser.ListUsers = new BindingList<User>(ListUser.ListUsers.OrderByDescending(s => s.FirstName).ToList());
+                            temp = new BindingList<User>(ListUser.GetList().OrderByDescending(s => s.FirstName).ToList());
                             _sortModeUsers = SortMode.Desceding;
                         }
                         else
                         {
-                            ListUser.ListUsers = new BindingList<User>(ListUser.ListUsers.OrderBy(s => s.FirstName).ToList());
+                            temp = new BindingList<User>(ListUser.GetList().OrderBy(s => s.FirstName).ToList());
                             _sortModeUsers = SortMode.Asceding;
                         }
-                        return ListUser.ListUsers;
+                        return temp;
                     }
                 case 1:
                     {
                         if (_sortModeUsers == SortMode.Asceding)
                         {
-                            ListUser.ListUsers = new BindingList<User>(ListUser.ListUsers.OrderByDescending(s => s.LastName).ToList());
+                            temp = new BindingList<User>(ListUser.GetList().OrderByDescending(s => s.LastName).ToList());
                             _sortModeUsers = SortMode.Desceding;
                         }
                         else
                         {
-                            ListUser.ListUsers = new BindingList<User>(ListUser.ListUsers.OrderBy(s => s.LastName).ToList());
+                            temp = new BindingList<User>(ListUser.GetList().OrderBy(s => s.LastName).ToList());
                             _sortModeUsers = SortMode.Asceding;
                         }
-                        return ListUser.ListUsers;
+                        return temp;
                     }
                 case 2:
                     {
                         if (_sortModeUsers == SortMode.Asceding)
                         {
-                            ListUser.ListUsers = new BindingList<User>(ListUser.ListUsers.OrderByDescending(s => s.Age).ToList());
+                            temp = new BindingList<User>(ListUser.GetList().OrderByDescending(s => s.Age).ToList());
                             _sortModeUsers = SortMode.Desceding;
                         }
                         else
                         {
-                            ListUser.ListUsers = new BindingList<User>(ListUser.ListUsers.OrderBy(s => s.Age).ToList());
+                            temp = new BindingList<User>(ListUser.GetList().OrderBy(s => s.Age).ToList());
                             _sortModeUsers = SortMode.Asceding;
                         }
-                        return ListUser.ListUsers;
+                        return temp;
                     }
                 default:
                     throw new ArgumentException();
@@ -103,83 +115,68 @@ namespace Task14
 
         public static BindingList<Award> SortAward()
         {
+            var temp = ListAward.GetList();
             if (_sortModeAwards == SortMode.Asceding)
             {
-                ListAward.ListAwards = new BindingList<Award>(ListAward.ListAwards.OrderByDescending(s => s.Title).ToList());
+                temp = new BindingList<Award>(ListAward.GetList().OrderByDescending(s => s.Title).ToList());
                 _sortModeAwards = SortMode.Desceding;
             }
             else
             {
-                ListAward.ListAwards = new BindingList<Award>(ListAward.ListAwards.OrderBy(s => s.Title).ToList());
+                temp = new BindingList<Award>(ListAward.GetList().OrderBy(s => s.Title).ToList());
                 _sortModeAwards = SortMode.Asceding;
             }
-            return ListAward.ListAwards;
+            return temp;
         }
 
         public static void EditUser(User user, string firstname, string lastname, DateTime birthday, List<Award> awards)
         {
-            ListUser.ListUsers.Remove(user);
-            ListUser.ListUsers.Add(new User(firstname, lastname, birthday));
-            foreach (var item in awards)
-            {
-                ListUser.ListUsers[ListUser.ListUsers.Count - 1].AddAward(item);
-            }
+            user.FirstName = firstname;
+            user.LastName = lastname;
+            user.BirthDay = birthday;
+            user.AwardList = awards;
+            ListUser.EditUser(user);
         }
 
         public static void EditAward(Award award, string title, string description)
         {
-            ListAward.ListAwards.Remove(award);
-            if (description == null)
+            if (description != null)
             {
-                ListAward.ListAwards.Add(new Award(title));
+                award.Description = description;
             }
-            else
-            {
-                ListAward.ListAwards.Add(new Award(title, description));
-            }
+            award.Title = title;
+            ListAward.EditAward(award);
         }
 
         public static BindingList<User> GetUserList()
         {
-            return ListUser.ListUsers;
+            return ListUser.GetList();
         }
 
         public static BindingList<Award> GetAwardList()
         {
-            return ListAward.ListAwards;
-        }
-
-        public static void AddAwardForLastUser(Award award)
-        {
-            ListUser.ListUsers[ListUser.ListUsers.Count - 1].AddAward(award);
+            return ListAward.GetList();
         }
 
         public static void AddUserToList(User user)
         {
-            ListUser.ListUsers.Add(user);
+            ListUser.Add(user);
         }
 
         public static void RemoveUserFromList(User user)
         {
-            ListUser.ListUsers.Remove(user);
+            ListUser.Remove(user);
         }
 
         public static void AddAwardToList(Award award)
         {
-            ListAward.ListAwards.Add(award);
+            ListAward.Add(award);
         }
     
         public static void RemoveAwardFromList(Award award)
         {
-            ListAward.ListAwards.Remove(award);
-            for (int i = 0; i < ListUser.ListUsers.Count; i++)
-            {
-                if (ListUser.ListUsers[i].AwardList.Contains(award))
-                {
-                    ListUser.ListUsers[i].AwardList.Remove(award);
-                    ListUser.ListUsers[i].UserShowAwardInicialization();
-                }
-            }
+            ListAward.Remove(award);
+            ListUser.DeleteAwardFromUser(award);
         }
     }
 }

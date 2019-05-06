@@ -27,6 +27,21 @@ namespace Entities
             Description = description;
         }
 
+        public Award(int id,string title)
+        {
+            countAwards++;
+            ID = id;
+            Title = title;
+        }
+
+        public Award(int id,string title, string description)
+        {
+            countAwards++;
+            ID = id;
+            Title = title;
+            Description = description;
+        }
+
         public int ID { get; set; }
 
         public string Title
