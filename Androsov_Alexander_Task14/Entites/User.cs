@@ -64,6 +64,10 @@ namespace Entities
             }
         }
 
+        public User()
+        {
+        }
+
         public string ShowAwardUser
         {
             get

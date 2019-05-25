@@ -1,0 +1,39 @@
+﻿@model UsersAndRewards.Entities.Reward
+
+@{
+    ViewBag.Title = "Remove";
+}
+
+<div class="form-horizontal jumbotron">
+    <h2>Remove Reward</h2>
+    <hr />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Back to List", "Index", "Rewards", htmlAttributes: new { @type = "button", @class = "btn btn-primary" })
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+    </div>
+</div>

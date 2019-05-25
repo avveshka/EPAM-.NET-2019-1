@@ -1,0 +1,78 @@
+﻿@model WebApplication.ViewModels.UserEditModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm((string)ViewBag.SubmitAction, (string)ViewBag.SubmitController))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal jumbotron">
+        <h2>@ViewBag.Title User</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.User.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength = "50" } })
+                @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.User.LastName, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength = "50" } })
+                @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.User.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.BirthDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Rewards, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @for (int i = 0; i < Model.RewardsModel.Count; i++)
+                {
+                    <div>
+                        @Html.CheckBox("RewardsModel[" + i + "].Value")
+                        @Html.DisplayFor(model => Model.RewardsModel.ElementAt(i).Key.Title)
+                        @Html.Hidden("RewardsModel[" + i + "].Key.ID", Model.RewardsModel.ElementAt(i).Key.ID)
+                    </div>
+                }
+
+                @*@foreach (var item in Model.AllRewards)
+                    {
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBox(item.Title, Model.User.Rewards.Exists(i => i.ID == item.ID), new { name = "User.Rewards" })
+                                @item.Title
+                                @Html.Label(item.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </label>
+                        </div>
+                    }*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Back to List", "Index", "Users", htmlAttributes: new { @type = "button", @class = "btn btn-primary" })
+                <input type="submit" value=@ViewBag.SubmitButtonText class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

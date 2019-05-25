@@ -12,6 +12,11 @@ namespace Entities
         private string _title;
         private string _description;
 
+        public Award()
+        {
+              
+        }
+
         public Award(string title)
         {
             countAwards++;
